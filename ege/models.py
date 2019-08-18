@@ -29,6 +29,7 @@ class Subject(models.Model):
     class Meta:
         verbose_name_plural = "Предметы"
         verbose_name = 'Предмет'
+        ordering = ['id']
 
 
 class ExamTest(models.Model):
@@ -68,7 +69,7 @@ class SubmittedTest(models.Model):
     q2 = models.CharField(max_length=30, blank=True)
     q3 = models.CharField(max_length=30, blank=True)
     date = models.DateTimeField(auto_now=True)
-    # num_of_test = models.ManyToManyField(ExamTest)
+    num_of_test = models.ForeignKey(ExamTest, blank=True, null=True, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Решенный вариант'
@@ -93,4 +94,3 @@ def pre_save_exam_test(sender, instance, *args, **kwargs):
 
 pre_save.connect(pre_save_subject_receiver, sender=Subject)
 pre_save.connect(pre_save_exam_test, sender=ExamTest)
-ghfghfgh

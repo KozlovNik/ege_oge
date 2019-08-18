@@ -209,6 +209,11 @@ ul {
     text-align: center;
 }
 
+.form-button {
+    padding-top: 20px;
+    text-align: center;
+}
+
 .question-table tr th {
     width:150px;
 }

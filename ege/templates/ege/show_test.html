@@ -1,4 +1,9 @@
 {% extends 'ege/base.html' %}
+
+{% block title %}
+    {{ ex_test }}
+{% endblock %}
+
 {% block content %}
     <div class="i-w">
     <h2>{{ ex_test }}</h2>
@@ -11,7 +16,7 @@
                 {{ form.label }}
                 {{ form }}
         {% endfor %}
-        <p><input type="submit"></p>
+        <p class="form-button"><button type="submit" class="btn btn-primary">Завершить тест</button></p>
     </form>
     </div>
 {% endblock %}

@@ -15,18 +15,20 @@ def choose_exam(exam):
 
 def index(request, **kwargs):
     subjects = choose_exam('oge') if '/oge/' in request.path else choose_exam('ege')
-    tests = Subject.objects.get(slug=kwargs['slug']).examtest_set.all()[:13] if kwargs else ''
+    tests = Subject.objects.get(slug=kwargs['slug']).examtest_set.all().order_by('id')[:13] if kwargs else ''
     context = {
-        'subjects': subjects,
+        'subjects': subjects.order_by('name'),
         'tests': tests,
     }
     return render(request, 'ege/index.html', context)
 
 
 def show_all_tests(request, **kwargs):
+    tests = Subject.objects.get(slug=kwargs['subj_slug']).examtest_set.all().order_by('id') if kwargs else ''
     subj = Subject.objects.get(slug=kwargs['subj_slug'])
     context = {
         'subj': subj,
+        'tests': tests
     }
     return render(request, 'ege/show_all_tests.html', context)
 
@@ -44,11 +46,12 @@ def show_test(request, **kwargs):
             }
             try:
                 usr = User.objects.get(username=request.user)
+                new_form = form.save()
+                new_form.users.add(usr)
+                new_form.num_of_test = ex_test
+                new_form.save()
             except User.DoesNotExist:
-                guest_user_id = 2
-                usr = User.objects.get(id=guest_user_id)
-            new_form = form.save()
-            new_form.users.add(usr)
+                pass
             return render(request, 'ege/results.html', context)
     else:
         form = NumForm()
