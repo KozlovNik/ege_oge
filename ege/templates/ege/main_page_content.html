@@ -1,0 +1,21 @@
+<section class="choose-subj">
+    <h2>ПРЕДМЕТ</h2>
+    <ul>
+        {% for subject in subjects %}
+        <li><a href="#">{{ subject.name }}</a></li>
+        {% endfor %}
+    </ul>
+</section>
+<div class="inner-container"><hr/></div>
+
+
+<section class="tests">
+    <h3>ВАРИАНТЫ</h3>
+    <div class="num-of-test inner-container">
+        <ul>
+            {% for test in tests %}
+            <li><a href="{% url 'show_test' test.pk %}">{{ test.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>

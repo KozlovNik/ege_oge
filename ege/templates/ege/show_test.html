@@ -1,0 +1,19 @@
+{% extends 'ege/base.html' %}
+{% block content %}
+    <div class="i-w">
+    <h2>{{ ex_test }}</h2>
+    <form method="post" class="question-form">
+        {% csrf_token %}
+        {{ crispy_first_form }}
+        {% for form, model in zip_files %}
+                <p class="question-heading-paragraph">{{ model.name }}</p>
+                <p>{{ model.description }}</p>
+                {{ form.label }}
+                {{ form }}
+        {% endfor %}
+        <p><input type="submit"></p>
+    </form>
+    </div>
+{% endblock %}
+
+{{ usr.id }}

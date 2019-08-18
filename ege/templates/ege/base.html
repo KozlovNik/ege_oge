@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'ege/style.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <title>{% block title %}Главная{% endblock %}</title>
+</head>
+<body>
+
+<!--HEADER-->
+
+<div class="wrapper">
+    <header class="main-header">
+        <nav class="main-navigation">
+            <div class="choose-exam">
+                <p>Выберите вид экзамена</p>
+                <p class="ege-oge"><a href="{% url 'exam_ege' %}">ЕГЭ</a></p>
+                <p class="ege-oge"><a href="{% url 'exam_oge' %}">ОГЭ</a></p>
+            </div>
+            <div class="user-navigation-wrapper">
+                <ul class="user-navigation">
+                    {% if user.is_authenticated %}
+                    <li class="log-in"><a href="{% url 'logout' %}" >Выход</a></li>
+                    {% else %}
+                    <li class="log-in"><a href="{% url 'login' %}" >Вход</a></li>
+                    <li class="sign-up"><a href="{% url 'register' %}">Регистрация</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!--CONTENT-->
+    <main class="container main-content">
+        <div class="side-bar">
+        <ul>
+            <li><a href="#">Об экзамене</a></li>
+            <li><a href="#">Каталог заданий</a></li>
+            <li><a href="#">Варианты</a></li>
+            <li><a href="#">Справочник</a></li>
+            <li><a href="#">Вопрос-ответ</a></li>
+        </ul>
+    </div>
+    <div class="main-content-wrapper">
+
+
+    {% block content %}
+    {% endblock %}
+
+
+    </div>
+    </main>
+    <!--FOOTER-->
+
+    <footer class="container">
+        <div class="footer-menu">
+            <ul>
+                <li><a href=""></a></li>
+            </ul>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

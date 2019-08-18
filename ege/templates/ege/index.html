@@ -1,0 +1,44 @@
+{% extends 'ege/base.html' %}
+{% load static %}
+
+{% block title %} Главная {% endblock %}
+
+{% block content %}
+    <section class="choose-subj i-w">
+        {% if messages %}
+                {% for message in messages %}
+                    <p class="alert-{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        <h2>ПРЕДМЕТ</h2>
+        <ul>
+            {% if 'oge' in request.path %}
+                {% for subject in subjects %}
+                    <li><a href="{% url 'subj_oge' subject.slug %}">{{ subject.name }}</a></li>
+                {% endfor %}
+            {% else %}
+                {% for subject in subjects %}
+                    <li><a href="{% url 'subj_ege' subject.slug %}">{{ subject.name }}</a></li>
+                {% endfor %}
+            {% endif %}
+
+        </ul>
+    </section>
+    <div class="inner-container">
+        <hr/>
+    </div>
+    <!-- Выбор варианта-->
+    <section class="tests">
+        {% if tests %}
+            <h3>ВАРИАНТЫ</h3>
+            <div class="num-of-test inner-container">
+                <ul>
+                    {% for test in tests %}
+                        <li><a href="{% url 'exam_test' test.slug %}">{{ test.name }}</a></li>
+                    {% endfor %}
+                    <li class="button-hover"><a href="{{ request.path }}all-tests">Все варианты</a></li>
+                </ul>
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}

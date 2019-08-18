@@ -1,0 +1,29 @@
+{% extends 'ege/base.html' %}
+
+{% block content %}
+    <div class="i-w">
+        <h2>{{ ex_test }}</h2>
+            <table class="question-table">
+                <tr>
+                    <th>Номер вопроса</th>
+                    <th>Правильный ответ</th>
+                    <th>Ваш ответ</th>
+                </tr>
+                <tr>
+                    {% for a, b in zip_files %}
+                        <td>{{ forloop.counter }}</td>
+                        {% if a.value == '' %}
+                            <td class="answer-is-none">{{ b.right_answer }}</td>
+                            <td class="answer-is-none">Не решено</td>
+                        {% elif a.value == b.right_answer %}
+                            <td class="correct-answer">{{ b.right_answer }}</td>
+                            <td class="correct-answer">{{ a.value }}</td>
+                        {% else %}
+                            <td class="incorrect-answer">{{ b.right_answer }}</td>
+                            <td class="incorrect-answer">{{ a.value }}</td>
+                        {% endif %}
+                        </tr>
+                    {% endfor %}
+            </table>
+    </div>
+{% endblock %}
