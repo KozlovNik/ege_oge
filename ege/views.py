@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
-from .models import ExamTest, Question, Subject, Exam
+from .models import ExamTest, Question, Subject, Exam, SubmittedTest
 from .form import NumForm
 from django.contrib.auth.forms import User
 
@@ -39,30 +39,43 @@ def show_test(request, **kwargs):
     if request.method == 'POST':
         form = NumForm(request.POST)
         if form.is_valid():
-            zip_files = zip(form, questions)
-            context = {
-                'zip_files': zip_files,
-                'ex_test': ex_test,
-            }
+
+            # Если True, значит пользователь уже когда-то проходил тест
             try:
-                usr = User.objects.get(username=request.user)
-                new_form = form.save()
-                new_form.users.add(usr)
-                new_form.num_of_test = ex_test
-                new_form.save()
+                usr = User.objects.get(pk=request.user.id)
+                test_model = usr.submittedtest_set.get(num_of_test_id=ex_test.id)
+                updated_form = NumForm(request.POST, instance=test_model)
+                updated_form.save()
+                context = zipped_context(updated_form, questions)
+                return render(request, 'ege/results.html', context)
+            except SubmittedTest.DoesNotExist:
+                pass
             except User.DoesNotExist:
                 pass
+
+            if request.user.is_authenticated:
+                save_user_test(request, form, ex_test)
+            context = zipped_context(form, questions)
             return render(request, 'ege/results.html', context)
     else:
         form = NumForm()
-        zip_files = zip(form, questions)
-        context = {
-            'zip_files': zip_files,
-            'ex_test': ex_test,
-        }
+        context = zipped_context(form, questions)
         return render(request, 'ege/show_test.html', context)
 
 
-def show_results(request, **kwargs):
 
-    return render(request, 'ege/results.html')
+
+def zipped_context(form, questions):
+    zipped_files = zip(form, questions)
+    zp = {
+        'zipped_files': zipped_files,
+    }
+    return zp
+
+
+def save_user_test(request, form, number_of_test):
+    usr = User.objects.get(username=request.user)
+    new_form = form.save(commit=False)
+    new_form.num_of_test = number_of_test
+    new_form.save()
+    new_form.users.add(usr)

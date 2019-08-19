@@ -9,5 +9,4 @@ urlpatterns = [
     path('oge/<slug>/', views.index, name='subj_oge'),
     re_path(r'(?P<exam>(ege|oge))/(?P<subj_slug>[\w-]+)/all-tests', views.show_all_tests, name='show_all_tests'),
     path('<exam_test_slug>/', views.show_test, name='exam_test'),
-    path('hello/results/', views.show_results, name='results'),
 ]

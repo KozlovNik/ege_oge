@@ -37,6 +37,9 @@
     <main class="container main-content">
         <div class="side-bar">
         <ul>
+            {% if user.is_authenticated %}
+            <li><a href="#">Мои тесты</a></li>
+            {% endif %}
             <li><a href="#">Об экзамене</a></li>
             <li><a href="#">Каталог заданий</a></li>
             <li><a href="#">Варианты</a></li>

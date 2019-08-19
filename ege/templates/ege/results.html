@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="i-w">
-        <h2>{{ ex_test }}</h2>
+        <h2>Резальтат теста</h2>
             <table class="question-table">
                 <tr>
                     <th>Номер вопроса</th>
@@ -10,7 +10,7 @@
                     <th>Ваш ответ</th>
                 </tr>
                 <tr>
-                    {% for a, b in zip_files %}
+                    {% for a, b in zipped_files %}
                         <td>{{ forloop.counter }}</td>
                         {% if a.value == '' %}
                             <td class="answer-is-none">{{ b.right_answer }}</td>
@@ -26,4 +26,5 @@
                     {% endfor %}
             </table>
     </div>
+    <p>{{ percent }}</p>
 {% endblock %}

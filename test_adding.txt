@@ -22,4 +22,3 @@ for exam in exams:
                     pass
         except IntegrityError:
             pass
-            

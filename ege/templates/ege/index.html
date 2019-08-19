@@ -12,6 +12,7 @@
             {% endif %}
         <h2>ПРЕДМЕТ</h2>
         <ul>
+
             {% if 'oge' in request.path %}
                 {% for subject in subjects %}
                     <li><a href="{% url 'subj_oge' subject.slug %}">{{ subject.name }}</a></li>
@@ -29,6 +30,7 @@
     </div>
     <!-- Выбор варианта-->
     <section class="tests">
+
         {% if tests %}
             <h3>ВАРИАНТЫ</h3>
             <div class="num-of-test inner-container">
@@ -40,5 +42,6 @@
                 </ul>
             </div>
         {% endif %}
+    
     </section>
 {% endblock %}

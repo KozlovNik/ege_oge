@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from transliterate import translit
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.urls import reverse
 
 
 class Exam(models.Model):
@@ -68,7 +69,7 @@ class SubmittedTest(models.Model):
     q1 = models.CharField(max_length=30, blank=True)
     q2 = models.CharField(max_length=30, blank=True)
     q3 = models.CharField(max_length=30, blank=True)
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField(auto_now_add=True)
     num_of_test = models.ForeignKey(ExamTest, blank=True, null=True, on_delete=models.CASCADE)
 
     class Meta:

@@ -10,7 +10,7 @@
     <form method="post" class="question-form">
         {% csrf_token %}
         {{ crispy_first_form }}
-        {% for form, model in zip_files %}
+        {% for form, model in zipped_files %}
                 <p class="question-heading-paragraph">{{ model.name }}</p>
                 <p>{{ model.description }}</p>
                 {{ form.label }}
