@@ -1,0 +1,40 @@
+{% extends 'ege/base.html' %}
+
+{% block title %}{{ usr_title }}{% endblock %}
+
+{% block content %}
+    <div class="i-w">
+        <div class="question-form">
+            <h1>{{ usr_title }}</h1>
+            {% for question, answer in zipped_files %}
+
+
+                <p class="question-name">{{ question.name }}</p>
+                <p>{{ question.description1|safe |linebreaks }}</p>
+
+                {% if question.image %}
+                    <p class="q-image"><img src="{{ question.image.url }}" alt="" style="width: 50%; height: 50%">
+                    </p>
+                {% endif %}
+
+                {% if question.description2 %}
+                    {{ question.description2|safe |linebreaks }}
+                {% endif %}
+
+                {% if question.right_answer|lower == answer|lower %}
+                    <div class="q-a q-a-right">
+                        <p>Вы дали правильный ответ! {{ question.right_answer }}</p>
+                    </div>
+                {% else %}
+                    <div class="q-a q-a-wrong">
+                        <p>Правильный ответ: {{ question.right_answer }}</p>
+                        <p>Ваш ответ: {{ answer }}</p>
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+{% endblock %}

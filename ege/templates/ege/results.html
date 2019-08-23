@@ -3,28 +3,30 @@
 {% block content %}
     <div class="i-w">
         <h2>Резальтат теста</h2>
-            <table class="question-table">
+        <table class="question-table">
+            <tr>
+                <th>Номер вопроса</th>
+                <th>Правильный ответ</th>
+                <th>Ваш ответ</th>
+            </tr>
+            {% for a, b in zipped_files %}
                 <tr>
-                    <th>Номер вопроса</th>
-                    <th>Правильный ответ</th>
-                    <th>Ваш ответ</th>
+                    <td>{{ forloop.counter }}</td>
+                    {% if a == '' %}
+                        <td class="answer-is-none">{{ b }}</td>
+                        <td class="answer-is-none">Не решено</td>
+                    {% elif a|lower == b|lower %}
+                        <td class="correct-answer">{{ b }}</td>
+                        <td class="correct-answer">{{ a }}</td>
+                    {% else %}
+                        <td class="incorrect-answer">{{ b }}</td>
+                        <td class="incorrect-answer">{{ a }}</td>
+                    {% endif %}
                 </tr>
-                <tr>
-                    {% for a, b in zipped_files %}
-                        <td>{{ forloop.counter }}</td>
-                        {% if a.value == '' %}
-                            <td class="answer-is-none">{{ b.right_answer }}</td>
-                            <td class="answer-is-none">Не решено</td>
-                        {% elif a.value == b.right_answer %}
-                            <td class="correct-answer">{{ b.right_answer }}</td>
-                            <td class="correct-answer">{{ a.value }}</td>
-                        {% else %}
-                            <td class="incorrect-answer">{{ b.right_answer }}</td>
-                            <td class="incorrect-answer">{{ a.value }}</td>
-                        {% endif %}
-                        </tr>
-                    {% endfor %}
-            </table>
+            {% endfor %}
+            <tr>
+                <td colspan="3"><b>Вы ответили на {{ percent }} % заданий</b></td>
+            </tr>
+        </table>
     </div>
-    <p>{{ percent }}</p>
 {% endblock %}

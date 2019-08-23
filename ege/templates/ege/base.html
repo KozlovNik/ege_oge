@@ -2,8 +2,8 @@
 <!DOCTYPE HTML>
 <html lang="ru">
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'ege/style.css' %}">
+    <link rel="stylesheet" href="{% static 'bs/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ege/css/style.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <meta charset="utf-8"/>
     <title>{% block title %}Главная{% endblock %}</title>
@@ -37,9 +37,11 @@
     <main class="container main-content">
         <div class="side-bar">
         <ul>
+
             {% if user.is_authenticated %}
-            <li><a href="#">Мои тесты</a></li>
+            <li><a href="{{ user.profile.get_absolute_url }}">Мои тесты</a></li>
             {% endif %}
+
             <li><a href="#">Об экзамене</a></li>
             <li><a href="#">Каталог заданий</a></li>
             <li><a href="#">Варианты</a></li>

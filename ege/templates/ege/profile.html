@@ -1,0 +1,14 @@
+{% extends 'ege/base.html' %}
+
+{% block title %} Мой профиль {% endblock %}
+
+{% block content %}
+    <div class="i-w">
+        <h1>Решенные варианты</h1>
+        <ul class="list-of-tests">
+            {% for test in usr_tests %}
+                <li><a href="{% url 'submitted_test' test.id %}">{{ test }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

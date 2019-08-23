@@ -6,13 +6,22 @@
 
 {% block content %}
     <div class="i-w">
-    <h2>{{ ex_test }}</h2>
+    <h2>{{ title }}</h2>
     <form method="post" class="question-form">
         {% csrf_token %}
         {{ crispy_first_form }}
         {% for form, model in zipped_files %}
-                <p class="question-heading-paragraph">{{ model.name }}</p>
-                <p>{{ model.description }}</p>
+                <p class="question-name">{{ model.name }}</p>
+                <p>{{ model.description1|safe|linebreaks }}</p>
+                {% if model.image %}
+                    <p class="q-image"><img src="{{ model.image.url }}" alt="" style="width: 50%; height: 50%"></p>
+                {% endif %}
+                {% if model.table %}
+                    <p>{{ model.table|safe }}</p>
+                {% endif %}
+                {% if model.description2 %}
+                    <p>{{ model.description2|safe|linebreaks }}</p>
+                {% endif %}
                 {{ form.label }}
                 {{ form }}
         {% endfor %}
