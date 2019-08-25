@@ -29,6 +29,19 @@ hr {
     height: 2px;
 }
 
+table {
+    /*border: 1px solid black;*/
+}
+
+table th, td {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid black;
+    font-weight: normal;
+}
+
+
 h1, h2, h3 {
     color: rgba(63, 64, 64, 0.9);
     text-align: center;

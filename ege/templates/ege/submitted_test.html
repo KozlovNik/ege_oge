@@ -10,17 +10,20 @@
 
 
                 <p class="question-name">{{ question.name }}</p>
-                <p>{{ question.description1|safe |linebreaks }}</p>
+                <p>{{ question.description1|safe }}</p>
 
                 {% if question.image %}
                     <p class="q-image"><img src="{{ question.image.url }}" alt="" style="width: 50%; height: 50%">
                     </p>
                 {% endif %}
-
-                {% if question.description2 %}
-                    {{ question.description2|safe |linebreaks }}
+                {% if question.audio_file %}
+                    <p>
+                        <audio src="{{ model.audio_file.url }}" controls></audio>
+                    </p>
                 {% endif %}
-
+                {% if question.description2 %}
+                    {{ question.description2|safe }}
+                {% endif %}
                 {% if question.right_answer|lower == answer|lower %}
                     <div class="q-a q-a-right">
                         <p>Вы дали правильный ответ! {{ question.right_answer }}</p>
@@ -38,3 +41,6 @@
 
     </div>
 {% endblock %}
+
+
+

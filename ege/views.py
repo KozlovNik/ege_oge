@@ -4,6 +4,7 @@ from .form import NumForm
 from django.contrib.auth.forms import User
 from django.contrib.auth.decorators import login_required
 # from django.contrib.auth import
+from itertools import zip_longest
 
 
 # Функция возвращает query сет с фильтром на экзамен.
@@ -66,8 +67,8 @@ def show_test(request, **kwargs):
                 # в новую переменную и их перенос в базу данных.
                 new_form = form.save(commit=False)
                 new_form.num_of_test = ex_test
+                new_form.user = request.user
                 new_form.save()
-                new_form.users.add(request.user)
 
             # Создание zip-объекта для итерации по двум значениям
             # через созданную функцию zipped_context и результатов теста
@@ -84,7 +85,7 @@ def show_test(request, **kwargs):
 # Функция для объединения полей ввода для ответов и данных модели с вопросами
 # Если blank_form = False, то в словарь также добавляются данные с результатами теста
 def zipped_context(form, questions, blank_form=True):
-    zipped_files = zip(form, questions)
+    zipped_files = zip_longest(form, questions)
     if blank_form:
         zp = {
             'zipped_files': zipped_files,
@@ -92,7 +93,7 @@ def zipped_context(form, questions, blank_form=True):
         return zp
     else:
         percent_of_right_answers = result_of_test(zipped_files)
-        zipped_files = zip(form, questions)
+        zipped_files = zip_longest(form, questions)
         zp = {
             'zipped_files': zipped_files,
             'percent': percent_of_right_answers,
@@ -128,6 +129,7 @@ def submitted_test(request, **kwargs):
     # questions = ex_test.question_set.all()
     usr_title = request.user.submittedtest_set.get(id=kwargs['id'])
     usr_test = usr_title.num_of_test.question_set.all()
+    print(usr_test)
     usr_answers = [getattr(usr_title, i) for i in dir(usr_title) if i.startswith('question')]
     # for i in dir(usr_answers):
     #     if i.startswith('question'):

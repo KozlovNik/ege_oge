@@ -6,27 +6,34 @@
 
 {% block content %}
     <div class="i-w">
-    <h2>{{ title }}</h2>
-    <form method="post" class="question-form">
-        {% csrf_token %}
-        {{ crispy_first_form }}
-        {% for form, model in zipped_files %}
+        <h2>{{ title }}</h2>
+        <form method="post" class="question-form">
+            {% csrf_token %}
+            {{ crispy_first_form }}
+            {% for form, model in zipped_files %}
                 <p class="question-name">{{ model.name }}</p>
-                <p>{{ model.description1|safe|linebreaks }}</p>
+                <p>{{ model.description1|safe }}</p>
                 {% if model.image %}
                     <p class="q-image"><img src="{{ model.image.url }}" alt="" style="width: 50%; height: 50%"></p>
                 {% endif %}
                 {% if model.table %}
                     <p>{{ model.table|safe }}</p>
                 {% endif %}
+                {% if model.audio_file %}
+                    <p>
+                        <audio src="{{ model.audio_file.url }}" controls></audio>
+                    </p>
+                {% endif %}
                 {% if model.description2 %}
-                    <p>{{ model.description2|safe|linebreaks }}</p>
+                    <p>{{ model.description2|safe }}</p>
                 {% endif %}
                 {{ form.label }}
                 {{ form }}
-        {% endfor %}
-        <p class="form-button"><button type="submit" class="btn btn-primary">Завершить тест</button></p>
-    </form>
+            {% endfor %}
+            <p class="form-button">
+                <button type="submit" class="btn btn-primary">Завершить тест</button>
+            </p>
+        </form>
     </div>
 {% endblock %}
 
