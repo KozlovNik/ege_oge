@@ -1,9 +1,8 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404, redirect, get_list_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from .models import ExamTest, Question, Subject, Exam, SubmittedTest
 from .form import NumForm
 from django.contrib.auth.forms import User
 from django.contrib.auth.decorators import login_required
-# from django.contrib.auth import
 from itertools import zip_longest
 
 
@@ -49,7 +48,7 @@ def show_test(request, **kwargs):
                 try:
                     # Если номер теста, который прошел заригистрированный пользователь,
                     # присутствует в таблице submittedtest, значит тест уже был когда-то пройден
-                    # и идет дальнейшее пересохранение результатов
+                    # и дальше производится дальнейшее пересохранение результатов
                     test_model = request.user.submittedtest_set.get(num_of_test_id=ex_test.id)
                     updated_form = NumForm(request.POST, instance=test_model)
                     updated_form.save()
@@ -85,7 +84,10 @@ def show_test(request, **kwargs):
 # Функция для объединения полей ввода для ответов и данных модели с вопросами
 # Если blank_form = False, то в словарь также добавляются данные с результатами теста
 def zipped_context(form, questions, blank_form=True):
-    zipped_files = zip_longest(form, questions)
+    if questions:
+        zipped_files = zip_longest(form, questions)
+    else:
+        zipped_files = ''
     if blank_form:
         zp = {
             'zipped_files': zipped_files,

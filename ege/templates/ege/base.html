@@ -12,34 +12,58 @@
 
 <!--HEADER-->
 
-<div class="wrapper">
-    <header class="main-header">
-        <nav class="main-navigation">
-            <div class="choose-exam">
-                <p>Выберите вид экзамена</p>
-                <p class="ege-oge"><a href="{% url 'exam_ege' %}">ЕГЭ</a></p>
-                <p class="ege-oge"><a href="{% url 'exam_oge' %}">ОГЭ</a></p>
-            </div>
-            <div class="user-navigation-wrapper">
-                <ul class="user-navigation">
-                    {% if user.is_authenticated %}
-                    <li class="log-in"><a href="{% url 'logout' %}" >Выход</a></li>
-                    {% else %}
-                    <li class="log-in"><a href="{% url 'login' %}" >Вход</a></li>
-                    <li class="sign-up"><a href="{% url 'register' %}">Регистрация</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-    </header>
+<header class="page-header">
+    <a class="page-header__logo">
+        <img class="page-header__logo-image" src="{% static 'logo.jpg' %}" alt="Английский для всех">
+    </a>
+    <nav class="main-nav">
+        <ul class="user-list">
+            {% if user.is_authenticated %}
+                <li class="user-list__item">
+                    <a class="user-list__link user-list__link--orange-letters" href="{% url 'logout' %}">Выйти</a>
+                </li>
+            {% else %}
+                <li class="user-list__item">
+                    <a class="user-list__link user-list__link--orange-letters" href="{% url 'login' %}">Войти</a>
+                </li>
+                <li class="user-list__item user-list__item--orange-button">
+                    <a class="user-list__link user-list__link--register" href="{% url 'register' %}">Регистрация</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
 
-    <!--CONTENT-->
-    <main class="container main-content">
-        <div class="side-bar">
+
+{##}
+{#<div class="wrapper">#}
+{#    <header class="main-header">#}
+{#        <nav class="main-navigation">#}
+{#            <div class="choose-exam">#}
+{#                <p>Выберите вид экзамена</p>#}
+{#                <p class="ege-oge"><a href="{% url 'exam_ege' %}">ЕГЭ</a></p>#}
+{#                <p class="ege-oge"><a href="{% url 'exam_oge' %}">ОГЭ</a></p>#}
+{#            </div>#}
+{#            <div class="user-navigation-wrapper">#}
+{#                <ul class="user-navigation">#}
+{#                    {% if user.is_authenticated %}#}
+{#                    <li class="log-in"><a href="{% url 'logout' %}" >Выход</a></li>#}
+{#                    {% else %}#}
+{#                    <li class="log-in"><a href="{% url 'login' %}" >Вход</a></li>#}
+{#                    <li class="sign-up"><a href="{% url 'register' %}">Регистрация</a></li>#}
+{#                    {% endif %}#}
+{#                </ul>#}
+{#            </div>#}
+{#        </nav>#}
+{#    </header>#}
+
+<!--CONTENT-->
+<main class="container main-content">
+    <div class="side-bar">
         <ul>
 
             {% if user.is_authenticated %}
-            <li><a href="{{ user.profile.get_absolute_url }}">Мои тесты</a></li>
+                <li><a href="{{ user.profile.get_absolute_url }}">Мои тесты</a></li>
             {% endif %}
 
             <li><a href="#">Об экзамене</a></li>
@@ -52,21 +76,21 @@
     <div class="main-content-wrapper">
 
 
-    {% block content %}
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
 
 
     </div>
-    </main>
-    <!--FOOTER-->
+</main>
+<!--FOOTER-->
 
-    <footer class="container">
-        <div class="footer-menu">
-            <ul>
-                <li><a href=""></a></li>
-            </ul>
-        </div>
-    </footer>
+<footer class="container">
+    <div class="footer-menu">
+        <ul>
+            <li><a href=""></a></li>
+        </ul>
+    </div>
+</footer>
 </div>
 </body>
 </html>

@@ -4,10 +4,6 @@
     padding: 0;
 }
 
-body {
-    border-top: 4px solid #DD4000;
-}
-
 
 p, a {
     font-family: 'Open Sans', sans-serif;
@@ -98,106 +94,69 @@ ul {
 
 
 
-/* навигационная панель */
 
-.main-header {
-    width: 100%;
-    background-color: white;
-}
-
-.choose-exam {
-    padding-left: 40px;
+/*header*/
+.page-header {
     display: flex;
-    align-items: center;
-}
-
-.choose-exam p:first-child {
-    font-size: 25px;
-    margin: 0;
-}
-
-.ege-oge {
-    display: table;
-    margin: 0 3px;
-}
-
-.ege-oge a{
-    width: 65px;
-    display: table-cell;
-    border-radius: 5px;
-    background-color: #f9a853;
-    font-size: 27px;
-    color: white;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.ege-oge a:hover{
-    background-color: rgba(253, 139, 2, 0.96);
-}
-
-.ege-oge a:active{
-    background-color: rgba(253, 56, 0, 0.96);
-}
-
-.main-navigation {
-    height: 60px;
-    display: flex;
+    background-color: #f8f8f8;
+    border-top: 4px solid #DD4000;
     justify-content: space-between;
-    background-color: #f6f7f7;
-
 }
 
-.user-navigation {
-    padding-right: 10px;
-    height: 100%;
+.user-list {
+    margin: 0 15px;
+    padding: 0;
+    list-style: none;
     display: flex;
+    height: 100%;
     align-items: center;
 }
 
-.user-navigation li {
+.user-list__link {
+    color: #3F4040;
+}
+
+
+.user-list__link--orange-letters {
+    color: #f9a853;
+}
+
+.user-list__link--orange-letters:hover {
+    color: rgba(253, 139, 2, 0.96);
+}
+
+.user-list__link--orange-letters:active {
+    color: rgba(253, 71, 0, 0.96);
+}
+
+.user-list__link--register {
+    color: white;
+}
+
+.user-list__link--register:hover {
+    color: white;
+}
+
+.user-list__item {
     padding: 5px;
     border-radius: 5px;
 }
 
-.user-navigation li a{
-    font-size: 20px;
-    margin: auto;
-}
-
-
-.log-in a {
-    color: #f9a853;
-}
-
-.log-in a:hover {
-    color: rgba(253, 139, 2, 0.96);
-}
-
-.log-in a:active {
-    color: rgba(253, 71, 0, 0.96);
-}
-
-.sign-up {
+.user-list__item--orange-button {
     background-color: #f9a853;
     color: white;
 }
 
-.sign-up:hover {
+.user-list__item--orange-button:hover {
     background-color: rgba(253, 139, 2, 0.96);
 }
 
-.sign-up:active {
+.user-list__item--orange-button:active {
     background-color: rgba(253, 71, 0, 0.96);
 }
 
-.sign-up a {
-    color: white;
-}
 
-.q-image {
-    text-align: center;
-}
+
 
 /* Основной контент */
 
@@ -509,3 +468,74 @@ footer .footer-menu ul li a:hover {
     border-bottom:2px solid black;
 }
 
+
+/*all*/
+body {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+
+}
+
+
+
+/*header*/
+.page-header {
+    display: flex;
+    background-color: #f8f8f8;
+    border-top: 4px solid #DD4000;
+    justify-content: space-between;
+}
+
+.user-list {
+    margin: 0 15px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.user-list__link {
+    color: #3F4040;
+}
+
+
+.user-list__link--orange-letters {
+    color: #f9a853;
+}
+
+.user-list__link--orange-letters:hover {
+    color: rgba(253, 139, 2, 0.96);
+}
+
+.user-list__link--orange-letters:active {
+    color: rgba(253, 71, 0, 0.96);
+}
+
+.user-list__link--register {
+    color: white;
+}
+
+.user-list__link--register:hover {
+    color: white;
+}
+
+.user-list__item {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.user-list__item--orange-button {
+    background-color: #f9a853;
+    color: white;
+}
+
+.user-list__item--orange-button:hover {
+    background-color: rgba(253, 139, 2, 0.96);
+}
+
+.user-list__item--orange-button:active {
+    background-color: rgba(253, 71, 0, 0.96);
+}
